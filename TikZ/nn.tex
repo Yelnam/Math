@@ -1,0 +1,44 @@
+\documentclass{article}
+\usepackage{tikz}
+
+\begin{document}
+
+\begin{tikzpicture}[
+    layer/.style={circle, draw, minimum size=1cm},
+    >=stealth
+]
+% Input layer
+\foreach \i in {1,2,3} {
+    \node[layer] (I\i) at (0,\i) {};
+}
+
+% Hidden layer
+\foreach \i in {1,2,3} {
+    \node[layer] (H\i) at (3,\i) {};
+}
+
+% Output layer
+\foreach \i in {1,2} {
+    \node[layer] (O\i) at (6,1.5+\i) {};
+}
+
+% Connections
+\foreach \i in {1,2,3} {
+    \foreach \j in {1,2,3} {
+        \draw[->] (I\i) -- (H\j);
+    }
+}
+
+\foreach \i in {1,2,3} {
+    \foreach \j in {1,2} {
+        \draw[->] (H\i) -- (O\j);
+    }
+}
+
+% Labels
+\node[left] at (-0.5,2) {Input};
+\node[below] at (3,0.5) {Hidden};
+\node[right] at (6.5,2.5) {Output};
+\end{tikzpicture} 
+
+\end{document}
